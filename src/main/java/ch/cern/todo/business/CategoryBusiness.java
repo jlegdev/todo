@@ -1,12 +1,10 @@
 package ch.cern.todo.business;
 
-
 import ch.cern.todo.dao.CategoryDao;
 import ch.cern.todo.data.model.Task;
 import ch.cern.todo.exception.business.NotFoundException;
 import ch.cern.todo.data.model.Category;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +16,13 @@ import java.util.Optional;
 @Service()
 public class CategoryBusiness {
 
-    @Autowired
-    private CategoryDao categoryDao;
-    @Autowired
-    private TaskBusiness taskBusiness;
+    private final CategoryDao categoryDao;
+    private final TaskBusiness taskBusiness;
 
+    public CategoryBusiness(final CategoryDao categoryDao, final TaskBusiness taskBusiness){
+        this.categoryDao = categoryDao;
+        this.taskBusiness = taskBusiness;
+    }
 
     public List<Category> getAll() {
         return categoryDao.getAll();

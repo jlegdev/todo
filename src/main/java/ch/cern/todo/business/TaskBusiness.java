@@ -15,8 +15,11 @@ import java.util.Optional;
 @Service()
 public class TaskBusiness {
 
-    @Autowired
     private TaskDao taskDao;
+
+    public TaskBusiness(TaskDao taskDao){
+        this.taskDao = taskDao;
+    }
 
     public List<Task> getAll() {
         return taskDao.getAll();

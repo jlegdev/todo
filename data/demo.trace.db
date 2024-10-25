@@ -1,0 +1,9 @@
+2024-04-14 19:33:35.934517+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TASK" not found (this database is empty); SQL statement:
+select t1_0.id,t1_0.category_id,t1_0.deadline,t1_0.description,t1_0.is_finish,t1_0.name from task t1_0 [42104-224]
+2024-04-14 19:33:36.356931+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CATEGORY" not found (this database is empty); SQL statement:
+select c1_0.id,c1_0.description,c1_0.name from category c1_0 [42104-224]
+2024-04-14 19:33:37.410222+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CATEGORY" not found (this database is empty); SQL statement:
+select c1_0.id,c1_0.description,c1_0.name from category c1_0 [42104-224]

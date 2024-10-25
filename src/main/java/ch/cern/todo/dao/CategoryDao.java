@@ -11,7 +11,7 @@ import java.util.Optional;
 
 
 @Scope(value = "singleton")
-@Service()
+@Service("CategoryDao")
 public class CategoryDao {
 
     private final CategoryRepository categoryRepository;
