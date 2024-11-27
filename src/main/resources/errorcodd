@@ -1216,6 +1216,157 @@ private boolean isReportingExceptionCodeAndTapeTradeIDCombinationValid() {
     return true; // Replace with actual validation
 }
 
+// Error Code: 2170
+// Description: Missing or Invalid allocationKeyDate
+// Explanation: allocationKeyDate must be populated in the correct format.
+@NotNull(message = "2170")
+@Pattern(regexp = "^\\d{8}$", message = "2170")
+private String allocationKeyDateValidator;
+
+// Error Code: 2171
+// Description: Missing or Invalid allocationID
+// Explanation: allocationID must be populated in the correct format.
+@NotNull(message = "2171")
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2171")
+private String allocationIDValidator;
+
+// Error Code: 2172
+// Description: Missing or Invalid priorAllocationKeyDate
+// Explanation: When required, priorAllocationKeyDate must be populated in the correct format.
+@Pattern(regexp = "^\\d{8}$", message = "2172")
+private String priorAllocationKeyDateValidator;
+
+// Error Code: 2173
+// Description: Missing or Invalid priorAllocationID
+// Explanation: When required, priorAllocationID must be populated and must be in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2173")
+private String priorAllocationIDValidator;
+
+// Error Code: 2174
+// Description: Missing or Invalid custType
+// Explanation: When required, custType must be populated with an allowable value.
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2174")
+private String custTypeValidator;
+
+// Error Code: 2175
+// Description: Missing or Invalid institutionFlag
+// Explanation: institutionFlag must be populated with one of the allowable values
+@NotNull(message = "2175")
+@Pattern(regexp = "^(TRUE|FALSE)$", message = "2175")
+private String institutionFlagValidator;
+
+// Error Code: 2176
+// Description: Missing or Invalid tradeDate
+// Explanation: tradeDate must be populated in the correct format.
+@NotNull(message = "2176")
+@Pattern(regexp = "^\\d{8}$", message = "2176")
+private String tradeDateValidator;
+
+// Error Code: 2177
+// Description: Missing or Invalid settlementDate
+// Explanation: settlementDate must be populated in the correct format.
+@NotNull(message = "2177")
+@Pattern(regexp = "^\\d{8}$", message = "2177")
+private String settlementDateValidator;
+
+// Error Code: 2178
+// Description: Missing or Invalid allocationType
+// Explanation: allocationType must be populated with one of the allowable values
+@NotNull(message = "2178")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2178")
+private String allocationTypeValidator;
+
+// Error Code: 2179
+// Description: Missing or Invalid DVPCustodianID
+// Explanation: When required, DVPCustodianID must be populated in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2179")
+private String DVPCustodianIDValidator;
+
+// Error Code: 2180
+// Description: Invalid correspondentCRD
+// Explanation: If populated, correspondentCRD must be populated in the correct format.
+@Pattern(regexp = "^[0-9]+$", message = "2180")
+private String correspondentCRDValidator;
+
+// Error Code: 2181
+// Description: Invalid newOrderFDID
+// Explanation: If populated, newOrderFDID must be populated in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2181")
+private String newOrderFDIDValidator;
+
+// Error Code: 2182
+// Description: Invalid allocationInstructionTime
+// Explanation: If populated, allocationInstructionTime must be in the correct format.
+@Pattern(regexp = "^\\d{8}T\\d{6}(\\.\\d{3,6})?Z$", message = "2182")
+private String allocationInstructionTimeValidator;
+
+// Error Code: 2183
+// Description: Missing or Invalid quotingIDQS
+// Explanation: When required, quotingIDQS must be populated in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2183")
+private String quotingIDQSValidator;
+
+// Error Code: 2184
+// Description: Invalid combination of clearingFirm and reportingExceptionCode
+// Explanation: Combination of clearingFirm and reportingExceptionCode must be valid.
+@AssertTrue(message = "2184")
+private boolean isClearingFirmAndReportingExceptionCodeCombinationValid() {
+    // Implement logic to check combination of clearingFirm and reportingExceptionCode
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2185
+// Description: Invalid combination of counterparty and reportingExceptionCode
+// Explanation: Combination of counterparty and reportingExceptionCode must be valid.
+@AssertTrue(message = "2185")
+private boolean isCounterpartyAndReportingExceptionCodeCombinationValid() {
+    // Implement logic to check combination of counterparty and reportingExceptionCode
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2186
+// Description: Missing or Invalid solicitationFlag
+// Explanation: solicitationFlag must be populated with one of the allowable values
+@NotNull(message = "2186")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2)$", message = "2186")
+private String solicitationFlagValidator;
+
+// Error Code: 2187
+// Description: Invalid combination of RFQID and solicitationFlag
+// Explanation: Combination of RFQID and solicitationFlag must be valid.
+@AssertTrue(message = "2187")
+private boolean isRFQIDAndSolicitationFlagCombinationValid() {
+    // Implement logic to check combination of RFQID and solicitationFlag
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2188
+// Description: Missing or Invalid unpricedInd
+// Explanation: unpricedInd must be populated with one of the allowable values
+@NotNull(message = "2188")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2)$", message = "2188")
+private String unpricedIndValidator;
+
+// Error Code: 2189
+// Description: Invalid combination of senderIMID and destination or receiverIMID
+// Explanation: On Order Route or New Quote events, senderIMID must not equal destination. On Order Accepted, Order Modified, and Quote Received events, senderIMID must not equal receiverIMID.
+@AssertTrue(message = "2189")
+private boolean isSenderIMIDCombinationValid() {
+    // Implement logic to check senderIMID combination
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2190
+// Description: Invalid combination of orderID and parentOrderID or priorOrderID
+// Explanation: When populated, parentOrderID or priorOrderID must not equal orderID.
+@AssertTrue(message = "2190")
+private boolean isOrderIDCombinationValid() {
+    if ((parentOrderID != null && parentOrderID.equals(orderID)) || 
+        (priorOrderID != null && priorOrderID.equals(orderID))) {
+        return false;
+    }
+    return true;
+}
 
 
 // Error Code: 2190
