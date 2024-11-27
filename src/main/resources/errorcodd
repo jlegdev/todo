@@ -674,5 +674,566 @@ private boolean isWorkingPriceValidator() {
     }
     if (StringUtils.isNot
 
+// Error Code: 2106
+// Description: Missing or Invalid unsolicitedInd
+// Explanation: unsolicitedInd must be populated in one of the allowable values.
+@NotNull(message = "2106")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2)$", message = "2106")
+private String unsolicitedIndValidator;
+
+// Error Code: 2107
+// Description: Invalid workingPrice
+// Explanation: workingPrice must be blank if atsDisplayInd is blank. When required, workingPrice must be populated in the correct format if atsDisplayInd is populated. If no workingPrice is applicable, it must be 0.
+private BigDecimal workingPrice;
+private String atsDisplayInd;
+@AssertTrue(message = "2107")
+private boolean isWorkingPriceValid() {
+    if (StringUtils.isEmpty(atsDisplayInd) && workingPrice != null) {
+        return false;
+    }
+    if (StringUtils.isNotEmpty(atsDisplayInd) && workingPrice == null) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2108
+// Description: Missing or Invalid buyDetails
+// Explanation: If sideDetailsInd = BUY, buyDetails must be populated. If sideDetailsInd = SELL, buyDetails must not be populated.
+private String sideDetailsInd;
+private BuyDetails buyDetails;
+@AssertTrue(message = "2108")
+private boolean isBuyDetailsValid() {
+    if ("BUY".equals(sideDetailsInd) && buyDetails == null) {
+        return false;
+    }
+    if ("SELL".equals(sideDetailsInd) && buyDetails != null) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2109
+// Description: Missing or Invalid orderID in buyDetails
+// Explanation: When required, orderID must be populated in the correct format.
+@AssertTrue(message = "2109")
+private boolean isOrderIDInBuyDetailsValid() {
+    if (buyDetails != null && StringUtils.isEmpty(buyDetails.getOrderID())) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2110
+// Description: Missing or Invalid orderKeyDate in buyDetails
+// Explanation: When required, orderKeyDate must be populated in the correct format.
+@AssertTrue(message = "2110")
+private boolean isOrderKeyDateInBuyDetailsValid() {
+    if (buyDetails != null && StringUtils.isEmpty(buyDetails.getOrderKeyDate())) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2111
+// Description: Missing or Invalid side in buyDetails
+// Explanation: side must be populated in the correct format.
+@AssertTrue(message = "2111")
+private boolean isSideInBuyDetailsValid() {
+    if (buyDetails != null && StringUtils.isEmpty(buyDetails.getSide())) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2112
+// Description: Missing or Invalid firmDesignatedID in buyDetails
+// Explanation: When required, firmDesignatedID must be populated in the correct format.
+@AssertTrue(message = "2112")
+private boolean isFirmDesignatedIDInBuyDetailsValid() {
+    if (buyDetails != null && StringUtils.isEmpty(buyDetails.getFirmDesignatedID())) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2113
+// Description: Missing or Invalid accountHolderType in buyDetails
+// Explanation: When required, accountHolderType must be one of the allowable values.
+@AssertTrue(message = "2113")
+private boolean isAccountHolderTypeInBuyDetailsValid() {
+    if (buyDetails != null && !isValidAccountHolderType(buyDetails.getAccountHolderType())) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2114
+// Description: Invalid combination of firmDesignatedID and orderID in buyDetails
+// Explanation: When required, the combination of firmDesignatedID and orderID in buyDetails must be valid.
+@AssertTrue(message = "2114")
+private boolean isFirmDesignatedIDAndOrderIDCombinationInBuyDetailsValid() {
+    // Implement logic to check the combination of firmDesignatedID and orderID in buyDetails
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2115
+// Description: Missing or Invalid sellDetails
+// Explanation: If sideDetailsInd = SELL, sellDetails must be populated. If sideDetailsInd = BUY, sellDetails must not be populated.
+@AssertTrue(message = "2115")
+private boolean isSellDetailsValid() {
+    if ("SELL".equals(sideDetailsInd) && sellDetails == null) {
+        return false;
+    }
+    if ("BUY".equals(sideDetailsInd) && sellDetails != null) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2116
+// Description: Missing or Invalid orderID in sellDetails
+// Explanation: When required, orderID must be populated in the correct format.
+@AssertTrue(message = "2116")
+private boolean isOrderIDInSellDetailsValid() {
+    if (sellDetails != null && StringUtils.isEmpty(sellDetails.getOrderID())) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2117
+// Description: Missing or Invalid orderKeyDate in sellDetails
+// Explanation: When required, orderKeyDate must be populated in the correct format.
+@AssertTrue(message = "2117")
+private boolean isOrderKeyDateInSellDetailsValid() {
+    if (sellDetails != null && StringUtils.isEmpty(sellDetails.getOrderKeyDate())) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2118
+// Description: Missing or Invalid side in sellDetails
+// Explanation: side must be populated in the correct format.
+@AssertTrue(message = "2118")
+private boolean isSideInSellDetailsValid() {
+    if (sellDetails != null && StringUtils.isEmpty(sellDetails.getSide())) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2119
+// Description: Missing or Invalid firmDesignatedID in sellDetails
+// Explanation: When required, firmDesignatedID must be populated in the correct format.
+@AssertTrue(message = "2119")
+private boolean isFirmDesignatedIDInSellDetailsValid() {
+    if (sellDetails != null && StringUtils.isEmpty(sellDetails.getFirmDesignatedID())) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2120
+// Description: Missing or Invalid accountHolderType in sellDetails
+// Explanation: When required, accountHolderType must be populated in the correct format.
+@AssertTrue(message = "2120")
+private boolean isAccountHolderTypeInSellDetailsValid() {
+    if (sellDetails != null && !isValidAccountHolderType(sellDetails.getAccountHolderType())) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2121
+// Description: Missing or Invalid orderID in clientDetails
+// Explanation: orderID must be populated in the correct format.
+@NotNull(message = "2121")
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2121")
+private String orderIDInClientDetailsValidator;
+
+// Error Code: 2122
+// Description: Missing or Invalid orderKeyDate in clientDetails
+// Explanation: orderKeyDate must be populated in the correct format.
+@NotNull(message = "2122")
+@Pattern(regexp = "^\\d{8}$", message = "2122")
+private String orderKeyDateInClientDetailsValidator;
+
+// Error Code: 2123
+// Description: Missing or Invalid side in clientDetails
+// Explanation: side must be populated in the correct format.
+@NotNull(message = "2123")
+@Pattern(regexp = "^(BUY|SELL|SHORT|EXEMPT)$", message = "2123")
+private String sideInClientDetailsValidator;
+
+// Error Code: 2124
+// Description: Invalid firmDesignatedID in clientDetails
+// Explanation: firmDesignatedID must be blank.
+@AssertTrue(message = "2124")
+private boolean isFirmDesignatedIDInClientDetailsValid() {
+    return StringUtils.isBlank(clientDetails.getFirmDesignatedID());
+}
+
+// Error Code: 2125
+// Description: Invalid accountHolderType in clientDetails
+// Explanation: accountHolderType must be blank.
+@AssertTrue(message = "2125")
+private boolean isAccountHolderTypeInClientDetailsValid() {
+    return StringUtils.isBlank(clientDetails.getAccountHolderType());
+}
+
+// Error Code: 2126
+// Description: Missing or Invalid orderID in firmDetails
+// Explanation: When required, orderID must be populated and in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2126")
+private String orderIDInFirmDetailsValidator;
+
+// Error Code: 2127
+// Description: Missing or Invalid orderKeyDate in firmDetails
+// Explanation: When required, orderKeyDate must be populated in the correct format.
+@Pattern(regexp = "^\\d{8}$", message = "2127")
+private String orderKeyDateInFirmDetailsValidator;
+
+// Error Code: 2128
+// Description: Missing or Invalid side in firmDetails
+// Explanation: side must be populated and in the correct format.
+@NotNull(message = "2128")
+@Pattern(regexp = "^(BUY|SELL|SHORT|EXEMPT)$", message = "2128")
+private String sideInFirmDetailsValidator;
+
+// Error Code: 2130
+// Description: Missing or Invalid accountHolderType in firmDetails
+// Explanation: When required, accountHolderType must be one of the allowable values.
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2130")
+private String accountHolderTypeInFirmDetailsValidator;
+
+// Error Code: 2132
+// Description: Record exceeds maximum length
+// Explanation: Record length must not exceed the maximum length for each record.
+@AssertTrue(message = "2132")
+private boolean isRecordLengthValid() {
+    // Implement logic to check record length
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2133
+// Description: Additional fields are specified in the record but are not defined for this CAT event type
+// Explanation: Refer to Sections 3.4 & 5 for permitted fields for each CAT event type.
+@AssertTrue(message = "2133")
+private boolean areAdditionalFieldsValid() {
+    // Implement logic to check for undefined fields
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2134
+// Description: Invalid JSON or CSV format
+// Explanation: The record is not represented in a valid format as specified in Section 2.5 Data Types.
+@AssertTrue(message = "2134")
+private boolean isFormatValid() {
+    // Implement logic to check JSON or CSV format
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2136
+// Description: Invalid Alphanumeric Character
+// Explanation: A field value in the record contains a delimiter or a non-allowable ASCII character
+@AssertTrue(message = "2136")
+private boolean areAlphanumericCharactersValid() {
+    // Implement logic to check for invalid characters
+    return true; // Replace with actual validation
+}
+// Error Code: 2136
+// Description: Invalid Alphanumeric Character
+// Explanation: A field value in the record contains a delimiter or a non-allowable ASCII character
+@AssertTrue(message = "2136")
+private boolean areAlphanumericCharactersValid() {
+    // Implement logic to check for invalid characters
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2137
+// Description: Missing or Invalid representativeInd
+// Explanation: representativeInd must be populated with one of the allowable values.
+@NotNull(message = "2137")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2137")
+private String representativeIndValidator;
+
+// Error Code: 2138
+// Description: Missing or Invalid reportingExceptionCode
+// Explanation: When required, reportingExceptionCode must be populated with one of the allowable values.
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2138")
+private String reportingExceptionCodeValidator;
+
+// Error Code: 2139
+// Description: Missing or Invalid RFQID
+// Explanation: RFQID must be populated in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2139")
+private String RFQIDValidator;
+
+// Error Code: 2140
+// Description: Missing or Invalid routedOrderID
+// Explanation: routedOrderID must be populated in the correct format.
+@NotNull(message = "2140")
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2140")
+private String routedOrderIDValidator;
+
+// Error Code: 2141
+// Description: Invalid routedQuoteID
+// Explanation: When required, routedQuoteID must be populated in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2141")
+private String routedQuoteIDValidator;
+
+// Error Code: 2142
+// Description: Missing or Invalid routeRejectedFlag
+// Explanation: routeRejectedFlag must be one of the allowable values.
+@NotNull(message = "2142")
+@Pattern(regexp = "^(TRUE|FALSE)$", message = "2142")
+private String routeRejectedFlagValidator;
+
+// Error Code: 2143
+// Description: Combination of senderType and senderIMID is invalid
+// Explanation: If senderType = F, senderIMID is the IMID of an Industry Member. If senderType = E, senderIMID must be one of the allowable values.
+private String senderType;
+private String senderIMID;
+@AssertTrue(message = "2143")
+private boolean isSenderTypeAndSenderIMIDValid() {
+    // Implement logic to check senderType and senderIMID combination
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2144
+// Description: Missing or Invalid senderType
+// Explanation: When required, senderType must be one of the allowable values.
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2144")
+private String senderTypeValidator;
+
+// Error Code: 2145
+// Description: Missing or Invalid senderIMID
+// Explanation: When required, senderIMID must be populated in the correct format. Must be valid for the Event Date.
+@AssertTrue(message = "2145")
+private boolean isSenderIMIDValid() {
+    // Implement logic to check senderIMID format and validity
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2146
+// Description: Missing or Invalid seqNum
+// Explanation: When required, seqNum must be in the correct format.
+@Pattern(regexp = "^[0-9]+$", message = "2146")
+private String seqNumValidator;
+
+// Error Code: 2147
+// Description: Missing or Invalid session
+// Explanation: When required, session must be populated. Required when destinationType is E.
+private String session;
+private String destinationType;
+@AssertTrue(message = "2147")
+private boolean isSessionValid() {
+    if ("E".equals(destinationType) && StringUtils.isEmpty(session)) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2148
+// Description: Missing or Invalid side
+// Explanation: side must be populated in one of the allowable values.
+@NotNull(message = "2148")
+@Pattern(regexp = "^(BUY|SELL|SHORT|EXEMPT)$", message = "2148")
+private String sideValidator;
+
+// Error Code: 2148
+// Description: Missing or Invalid side
+// Explanation: side must be populated in one of the allowable values.
+@NotNull(message = "2148")
+@Pattern(regexp = "^(BUY|SELL|SHORT|EXEMPT)$", message = "2148")
+private String sideValidator;
+
+// Error Code: 2149
+// Description: CATReporterIMID and senderIMID must be assigned to the same firm
+// Explanation: CATReporterIMID and senderIMID must be assigned to the same firm.
+@AssertTrue(message = "2149")
+private boolean isCATReporterIMIDAndSenderIMIDValid() {
+    // Implement logic to check if CATReporterIMID and senderIMID are assigned to the same firm
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2150
+// Description: CATReporterIMID and receiverIMID must be assigned to the same firm
+// Explanation: CATReporterIMID and receiverIMID must be assigned to the same firm.
+@AssertTrue(message = "2150")
+private boolean isCATReporterIMIDAndReceiverIMIDValid() {
+    // Implement logic to check if CATReporterIMID and receiverIMID are assigned to the same firm
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2151
+// Description: Firm provided record count in meta file does not equal row count in the data file
+// Explanation: The record count in the data file as calculated by CAT does not match the record count provided in the metadata file.
+@AssertTrue(message = "2151")
+private boolean isRecordCountValid() {
+    // Implement logic to check if record count matches between meta file and data file
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2153
+// Description: Data File is not Readable
+// Explanation: Data file format is not readable as it contains an invalid compression format.
+@AssertTrue(message = "2153")
+private boolean isDataFileReadable() {
+    // Implement logic to check if data file is readable
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2154
+// Description: Invalid quoteWantedInd
+// Explanation: When required, quoteWantedInd must be populated in one of the allowable values.
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2154")
+private String quoteWantedIndValidator;
+
+// Error Code: 2156
+// Description: Invalid reservedForFutureUse
+// Explanation: reservedForFutureUse must not be populated.
+@AssertTrue(message = "2156")
+private boolean isReservedForFutureUseValid() {
+    return StringUtils.isEmpty(reservedForFutureUse);
+}
+
+// Error Code: 2157
+// Description: Invalid quantity in buyDetails
+// Explanation: If populated, quantity in buyDetails must be in the correct format.
+@AssertTrue(message = "2157")
+private boolean isQuantityInBuyDetailsValid() {
+    // Implement logic to check quantity format in buyDetails
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2158
+// Description: Invalid originatingIMID in buyDetails
+// Explanation: If populated, originatingIMID in buyDetails must be in the correct format.
+@AssertTrue(message = "2158")
+private boolean isOriginatingIMIDInBuyDetailsValid() {
+    // Implement logic to check originatingIMID format in buyDetails
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2159
+// Description: Invalid quantity in sellDetails
+// Explanation: If populated, quantity in sellDetails must be in the correct format.
+@AssertTrue(message = "2159")
+private boolean isQuantityInSellDetailsValid() {
+    // Implement logic to check quantity format in sellDetails
+    return true; // Replace with actual validation
+}
+// Error Code: 2160
+// Description: Invalid originatingIMID in sellDetails
+// Explanation: If populated, originatingIMID in sellDetails must be in the correct format.
+@AssertTrue(message = "2160")
+private boolean isOriginatingIMIDInSellDetailsValid() {
+    // Implement logic to check originatingIMID format in sellDetails
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2161
+// Description: Invalid quantity in clientDetails
+// Explanation: If populated, quantity in clientDetails must be in the correct format.
+@AssertTrue(message = "2161")
+private boolean isQuantityInClientDetailsValid() {
+    // Implement logic to check quantity format in clientDetails
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2162
+// Description: Invalid originatingIMID in clientDetails
+// Explanation: If populated, originatingIMID in clientDetails must be in the correct format.
+@AssertTrue(message = "2162")
+private boolean isOriginatingIMIDInClientDetailsValid() {
+    // Implement logic to check originatingIMID format in clientDetails
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2163
+// Description: Invalid quantity in firmDetails
+// Explanation: If populated, quantity in firmDetails must be in the correct format.
+@AssertTrue(message = "2163")
+private boolean isQuantityInFirmDetailsValid() {
+    // Implement logic to check quantity format in firmDetails
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2164
+// Description: Invalid originatingIMID in firmDetails
+// Explanation: If populated, originatingIMID in firmDetails must be in the correct format
+@AssertTrue(message = "2164")
+private boolean isOriginatingIMIDInFirmDetailsValid() {
+    // Implement logic to check originatingIMID format in firmDetails
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2165
+// Description: Missing or Invalid orderID in aggregatedOrders
+// Explanation: When required, orderID in aggregatedOrders must be populated in the correct format.
+@AssertTrue(message = "2165")
+private boolean isOrderIDInAggregatedOrdersValid() {
+    // Implement logic to check orderID format in aggregatedOrders
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2166
+// Description: Missing or Invalid orderKeyDate in aggregatedOrders
+// Explanation: When required, orderKeyDate in aggregated orders must be populated in the correct format.
+@AssertTrue(message = "2166")
+private boolean isOrderKeyDateInAggregatedOrdersValid() {
+    // Implement logic to check orderKeyDate format in aggregatedOrders
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2167
+// Description: Invalid quantity in aggregatedOrders
+// Explanation: If populated, quantity in aggregatedOrders must be in the correct format.
+@AssertTrue(message = "2167")
+private boolean isQuantityInAggregatedOrdersValid() {
+    // Implement logic to check quantity format in aggregatedOrders
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2168
+// Description: Invalid originatingIMID in aggregatedOrders
+// Explanation: If populated, originatingIMID in aggregatedOrders must be in correct format.
+@AssertTrue(message = "2168")
+private boolean isOriginatingIMIDInAggregatedOrdersValid() {
+    // Implement logic to check originatingIMID format in aggregatedOrders
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2169
+// Description: Invalid combination of reportingExceptionCode and tapeTradeID
+// Explanation: The combination of reportingExceptionCode and tapeTradeID must be valid. Refer to Section 4.12. for more details.
+@AssertTrue(message = "2169")
+private boolean isReportingExceptionCodeAndTapeTradeIDCombinationValid() {
+    // Implement logic to check combination of reportingExceptionCode and tapeTradeID
+    return true; // Replace with actual validation
+}
+
+
+
+// Error Code: 2190
+// Description: Invalid combination of orderID and parentOrderID or priorOrderID
+// Explanation: When populated, parentOrderID or priorOrderID must not equal orderID.
+private String orderID;
+private String parentOrderID;
+private String priorOrderID;
+@AssertTrue(message = "2190")
+private boolean isOrderIDCombinationValid() {
+    if ((parentOrderID != null && parentOrderID.equals(orderID)) || 
+        (priorOrderID != null && priorOrderID.equals(orderID))) {
+        return false;
+    }
+    return true;
+}
+
+
+
 
 
