@@ -1379,6 +1379,44 @@ private boolean isOrderIDCombinationValid() {
 }
 
 
+// Error Code: 2187
+// Description: Invalid combination of RFQID and solicitationFlag
+// Explanation: Combination of RFQID and solicitationFlag must be valid.
+@AssertTrue(message = "2187")
+private boolean isRFQIDAndSolicitationFlagCombinationValid() {
+    // Implement logic to check combination of RFQID and solicitationFlag
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2188
+// Description: Missing or Invalid unpricedInd
+// Explanation: unpricedInd must be populated with one of the allowable values
+@NotNull(message = "2188")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2)$", message = "2188")
+private String unpricedIndValidator;
+
+// Error Code: 2189
+// Description: Invalid combination of senderIMID and destination or receiverIMID
+// Explanation: On Order Route or New Quote events, senderIMID must not equal destination. On Order Accepted, Order Modified, and Quote Received events, senderIMID must not equal receiverIMID.
+@AssertTrue(message = "2189")
+private boolean isSenderIMIDCombinationValid() {
+    // Implement logic to check senderIMID combination
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2190
+// Description: Invalid combination of orderID and parentOrderID or priorOrderID
+// Explanation: When populated, parentOrderID or priorOrderID must not equal orderID.
+@AssertTrue(message = "2190")
+private boolean isOrderIDCombinationValid() {
+    if ((parentOrderID != null && parentOrderID.equals(orderID)) || 
+        (priorOrderID != null && priorOrderID.equals(orderID))) {
+        return false;
+    }
+    return true;
+}
+
+
 }
 
 
