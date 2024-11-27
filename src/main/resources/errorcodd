@@ -332,6 +332,12 @@ public class CATEventValidator {
 @NotBlank(message = "2052")
 private String nboQtyValidator;
 
+// Error Code: 2052
+// Description: Missing or Invalid nboQty
+// Explanation: When required, nboQty must be in the correct format.
+@NotBlank(message = "2052")
+private String nboQtyValidator;
+
 // Error Code: 2053
 // Description: Missing or Invalid negotiatedTradeFlag
 // Explanation: negotiatedTradeFlag must be populated and one of the allowable values.
@@ -395,5 +401,278 @@ private String orderIDValidator;
 @NotNull(message = "2062")
 @Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2062")
 private String orderTypeValidator;
+
+// Error Code: 2063
+// Description: Missing or Invalid orderKeyDate
+// Explanation: orderKeyDate must be populated and in the correct format.
+@NotNull(message = "2063")
+@Pattern(regexp = "^\\d{8}$", message = "2063")
+private String orderKeyDateValidator;
+
+// Error Code: 2064
+// Description: Missing or Invalid originatingIMID
+// Explanation: If populated, originatingIMID must be in the correct format on all secondary events. Must be valid for the Event Date.
+private String originatingIMID;
+@AssertTrue(message = "2064")
+private boolean isOriginatingIMIDValid() {
+    // Implement logic to check originatingIMID format and validity
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2065
+// Description: Missing or Invalid parentOrderID
+// Explanation: parentOrderID must be populated in the correct format.
+@NotNull(message = "2065")
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2065")
+private String parentOrderIDValidator;
+
+// Error Code: 2066
+// Description: Missing or Invalid parentOrderKeyDate
+// Explanation: parentOrderKeyDate must be populated in the correct format.
+@NotNull(message = "2066")
+@Pattern(regexp = "^\\d{8}$", message = "2066")
+private String parentOrderKeyDateValidator;
+
+// Error Code: 2068
+// Description: Missing or Invalid price
+// Explanation: price must be in the correct format.
+@NotNull(message = "2068")
+@Digits(integer = 10, fraction = 8, message = "2068")
+private BigDecimal priceValidator;
+
+// Error Code: 2072
+// Description: Missing or Invalid priorOrderID
+// Explanation: When required, priorOrderID must be populated in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2072")
+private String priorOrderIDValidator;
+
+// Error Code: 2073
+// Description: Missing or Invalid priorOrderKeyDate
+// Explanation: When required, priorOrderKeyDate must be populated in the correct format.
+@Pattern(regexp = "^\\d{8}$", message = "2073")
+private String priorOrderKeyDateValidator;
+
+// Error Code: 2076
+// Description: Missing or Invalid priorQuoteKeyDate
+// Explanation: When required, priorQuoteKeyDate must be populated in the correct format.
+@Pattern(regexp = "^\\d{8}$", message = "2076")
+private String priorQuoteKeyDateValidator;
+
+// Error Code: 2078
+// Description: Missing or Invalid quantity
+// Explanation: quantity must be in the correct format.
+@NotNull(message = "2078")
+@Digits(integer = 10, fraction = 0, message = "2078")
+private Long quantityValidator;
+
+// Error Code: 2079
+// Description: Missing or Invalid quoteID
+// Explanation: When required, quoteID must be populated in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2079")
+private String quoteIDValidator;
+
+// Error Code: 2080
+// Description: Missing or Invalid quoteKeyDate
+// Explanation: When required, quoteKeyDate must be populated in the correct format.
+@Pattern(regexp = "^\\d{8}$", message = "2080")
+private String quoteKeyDateValidator;
+
+// Error Code: 2081
+// Description: Missing or Invalid receiverIMID
+// Explanation: receiverIMID must be populated in the correct format.
+@NotNull(message = "2081")
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2081")
+private String receiverIMIDValidator;
+
+// Error Code: 2082
+// Description: Missing or Invalid receiverType
+// Explanation: receiverType must be populated in the correct format.
+@NotNull(message = "2082")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2082")
+private String receiverTypeValidator;
+
+// Error Code: 2083
+// Description: Missing or Invalid reportingExceptionCode
+// Explanation: reportingExceptionCode must be populated in the correct format.
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2083")
+private String reportingExceptionCodeValidator;
+
+// Error Code: 2084
+// Description: Missing or Invalid representativeInd
+// Explanation: representativeInd must be populated in the correct format.
+@NotNull(message = "2084")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2084")
+private String representativeIndValidator;
+
+// Error Code: 2085
+// Description: Missing or Invalid priorFillKeyDate
+// Explanation: When required, priorFillKeyDate must be populated and in the correct format.
+@Pattern(regexp = "^\\d{8}$", message = "2085")
+private String priorFillKeyDateValidator;
+
+// Error Code: 2085
+// Description: Missing or Invalid priorFulfillmentID
+// Explanation: When required, priorFulfillmentID must be in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2085")
+private String priorFulfillmentIDValidator;
+
+// Error Code: 2086
+// Description: Missing or Invalid routedOrderID
+// Explanation: routedOrderID must be populated in the correct format.
+@NotNull(message = "2086")
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2086")
+private String routedOrderIDValidator;
+
+// Error Code: 2087
+// Description: Invalid routedQuoteID
+// Explanation: When required, routedQuoteID must be populated in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2087")
+private String routedQuoteIDValidator;
+
+// Error Code: 2088
+// Description: Invalid routeRejectedFlag
+// Explanation: routeRejectedFlag must be one of the allowable values.
+@NotNull(message = "2088")
+@Pattern(regexp = "^(TRUE|FALSE)$", message = "2088")
+private String routeRejectedFlagValidator;
+
+// Error Code: 2089
+// Description: Combination of senderType and senderIMID is invalid
+// Explanation: If senderType = F, senderIMID is the IMID of an Industry Member. If senderType = E, senderIMID must be one of the allowable values.
+private String senderType;
+private String senderIMID;
+@AssertTrue(message = "2089")
+private boolean isSenderTypeAndSenderIMIDValid() {
+    // Implement logic to check senderType and senderIMID combination
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2090
+// Description: Missing or Invalid senderType
+// Explanation: When required, senderType must be one of the allowable values.
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2090")
+private String senderTypeValidator;
+
+// Error Code: 2091
+// Description: Missing or Invalid senderIMID
+// Explanation: When required, senderIMID must be populated in the correct format. Must be valid for the Event Date.
+@AssertTrue(message = "2091")
+private boolean isSenderIMIDValid() {
+    // Implement logic to check senderIMID format and validity
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2092
+// Description: Missing or Invalid seqNum
+// Explanation: When required, seqNum must be in the correct format.
+@Pattern(regexp = "^[0-9]+$", message = "2092")
+private String seqNumValidator;
+
+// Error Code: 2093
+// Description: Missing or Invalid session
+// Explanation: When required, session must be populated. Required when destinationType is E.
+private String session;
+private String destinationType;
+@AssertTrue(message = "2093")
+private boolean isSessionValid() {
+    if ("E".equals(destinationType) && StringUtils.isEmpty(session)) {
+        return false;
+    }
+    return true;
+}
+
+// Error Code: 2095
+// Description: Missing or Invalid side
+// Explanation: side must be populated in one of the allowable values.
+@NotNull(message = "2095")
+@Pattern(regexp = "^(BUY|SELL|SHORT|EXEMPT)$", message = "2095")
+private String sideValidator;
+
+// Error Code: 2096
+// Description: Missing or Invalid symbol
+// Explanation: symbol must be populated in the correct format.
+@NotNull(message = "2096")
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2096")
+private String symbolValidator;
+
+// Error Code: 2098
+// Description: symbol not effective on Event Date
+// Explanation: symbol is not effective on the event date.
+private String symbol;
+@AssertTrue(message = "2098")
+private boolean isSymbolEffectiveValidator() {
+    // Implement logic to check if symbol is effective on event date
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2099
+// Description: symbol does not match listing market format
+// Explanation: For exchange listed securities, the symbol format must match the format published by the primary listing market.
+@AssertTrue(message = "2099")
+private boolean isSymbolFormatValidator() {
+    // Implement logic to check symbol format against listing market format
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2100
+// Description: Invalid tapeTradeID
+// Explanation: If populated, tapeTradeID must be in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2100")
+private String tapeTradeIDValidator;
+
+// Error Code: 2101
+// Description: Missing or Invalid timeInForce
+// Explanation: timeInForce value must be populated in the correct format. Name and value must be provided when applicable.
+@NotNull(message = "2101")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2101")
+private String timeInForceValidator;
+
+// Error Code: 2102
+// Description: Missing or Invalid tradeID
+// Explanation: tradeID must be populated in the correct format.
+@NotNull(message = "2102")
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2102")
+private String tradeIDValidator;
+
+// Error Code: 2103
+// Description: Missing or Invalid tradeKeyDate
+// Explanation: tradeKeyDate must be populated in the correct format.
+@NotNull(message = "2103")
+@Pattern(regexp = "^\\d{8}$", message = "2103")
+private String tradeKeyDateValidator;
+
+// Error Code: 2104
+// Description: Missing or Invalid tradingSession
+// Explanation: tradingSession must be populated in one of the allowable values.
+@NotNull(message = "2104")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2104")
+private String tradingSessionValidator;
+
+// Error Code: 2105
+// Description: Missing or Invalid type
+// Explanation: For each event type, type must be populated and one of the allowable values.
+@NotNull(message = "2105")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2105")
+private String typeValidator;
+
+// Error Code: 2106
+// Description: Missing or Invalid unsolicitedInd
+// Explanation: unsolicitedInd must be populated in one of the allowable values.
+@NotNull(message = "2106")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2)$", message = "2106")
+private String unsolicitedIndValidator;
+
+// Error Code: 2107
+// Description: Invalid workingPrice
+// Explanation: workingPrice must be blank if atsDisplayInd is blank. When required, workingPrice must be populated in the correct format if atsDisplayInd is populated. If no workingPrice is applicable, it must be 0.
+private BigDecimal workingPrice;
+private String atsDisplayInd;
+@AssertTrue(message = "2107")
+private boolean isWorkingPriceValidator() {
+    if (StringUtils.isEmpty(atsDisplayInd) && workingPrice != null) {
+        return false;
+    }
+    if (StringUtils.isNot
+
 
 
