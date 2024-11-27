@@ -326,6 +326,74 @@ public class CATEventValidator {
     @NotBlank(message = "2052")
     private String nboQtyValidator;
 
-    // Error Code: 2053
-    // Description: Missing or Invalid negotiatedTradeFlag
-    // Explanation: negoti
+    // Error Code: 2052
+// Description: Missing or Invalid nboQty
+// Explanation: When required, nboQty must be in the correct format.
+@NotBlank(message = "2052")
+private String nboQtyValidator;
+
+// Error Code: 2053
+// Description: Missing or Invalid negotiatedTradeFlag
+// Explanation: negotiatedTradeFlag must be populated and one of the allowable values.
+@NotNull(message = "2053")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2)$", message = "2053")
+private String negotiatedTradeFlagValidator;
+
+// Error Code: 2054
+// Description: Missing or Invalid sideDetailsInd
+// Explanation: sideDetailsInd must be populated with one of the allowable values.
+@NotNull(message = "2054")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2054")
+private String sideDetailsIndValidator;
+
+// Error Code: 2055
+// Description: Invalid nextUnlinked
+// Explanation: nextUnlinked must be one of the allowable values.
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2)$", message = "2055")
+private String nextUnlinkedValidator;
+
+// Error Code: 2056
+// Description: Missing or Invalid onlyOneQuoteFlag
+// Explanation: onlyOneQuoteFlag must be populated with one of the allowable values if required to populate.
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2)$", message = "2056")
+private String onlyOneQuoteFlagValidator;
+
+// Error Code: 2057
+// Description: Missing or Invalid openCloseIndicator
+// Explanation: When required, openCloseIndicator must be one of the allowable values.
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2057")
+private String openCloseIndicatorValidator;
+
+// Error Code: 2058
+// Description: Missing or Invalid optionID
+// Explanation: optionID must be populated in the correct format.
+@NotNull(message = "2058")
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2058")
+private String optionIDValidator;
+
+// Error Code: 2060
+// Description: optionID not effective on Event Date
+// Explanation: optionID is not effective on the event date.
+private String optionID;
+private LocalDate eventDate;
+@AssertTrue(message = "2060")
+private boolean isOptionIDEffectiveValidator() {
+    // Implement logic to check if optionID is effective on event date
+    return true; // Replace with actual validation
+}
+
+// Error Code: 2061
+// Description: Missing or Invalid orderID
+// Explanation: orderID must be populated in the correct format.
+@NotNull(message = "2061")
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2061")
+private String orderIDValidator;
+
+// Error Code: 2062
+// Description: Missing or Invalid orderType
+// Explanation: orderType must be populated with one of the allowable values.
+@NotNull(message = "2062")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2062")
+private String orderTypeValidator;
+
+
