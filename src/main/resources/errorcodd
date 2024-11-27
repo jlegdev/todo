@@ -1,6 +1,64 @@
-import org.apache.commons.lang3.StringUtils;
+ce import org.apache.commons.lang3.StringUtils;
 
 public class CATEventValidator {
+
+// Error Code: 2078
+// Description: Missing or Invalid quantity
+// Explanation: quantity must be in the correct format.
+@NotNull(message = "2078")
+@Digits(integer = 10, fraction = 0, message = "2078")
+private Long quantityValidator;
+
+// Error Code: 2079
+// Description: Missing or Invalid quoteID
+// Explanation: When required, quoteID must be populated in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2079")
+private String quoteIDValidator;
+
+// Error Code: 2080
+// Description: Missing or Invalid quoteKeyDate
+// Explanation: When required, quoteKeyDate must be populated in the correct format.
+@Pattern(regexp = "^\\d{8}$", message = "2080")
+private String quoteKeyDateValidator;
+
+// Error Code: 2081
+// Description: Missing or Invalid receiverIMID
+// Explanation: receiverIMID must be populated in the correct format.
+@NotNull(message = "2081")
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2081")
+private String receiverIMIDValidator;
+
+// Error Code: 2082
+// Description: Missing or Invalid receiverType
+// Explanation: receiverType must be populated in the correct format.
+@NotNull(message = "2082")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2082")
+private String receiverTypeValidator;
+
+// Error Code: 2083
+// Description: Missing or Invalid reportingExceptionCode
+// Explanation: reportingExceptionCode must be populated in the correct format.
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2083")
+private String reportingExceptionCodeValidator;
+
+// Error Code: 2084
+// Description: Missing or Invalid representativeInd
+// Explanation: representativeInd must be populated in the correct format.
+@NotNull(message = "2084")
+@Pattern(regexp = "^(ALLOWED_VALUE_1|ALLOWED_VALUE_2|...)$", message = "2084")
+private String representativeIndValidator;
+
+// Error Code: 2085
+// Description: Missing or Invalid priorFillKeyDate
+// Explanation: When required, priorFillKeyDate must be populated and in the correct format.
+@Pattern(regexp = "^\\d{8}$", message = "2085")
+private String priorFillKeyDateValidator;
+
+// Error Code: 2085
+// Description: Missing or Invalid priorFulfillmentID
+// Explanation: When required, priorFulfillmentID must be in the correct format.
+@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "2085")
+private String priorFulfillmentIDValidator;
 
     // Error Code: 2001
     // Description: Missing or Invalid accountHolderType
